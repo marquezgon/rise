@@ -31,13 +31,20 @@ class Home extends Component {
     axios.delete(`${URL}/posts/${postId}`).then(() => {
       const postToDelete = this.state.postsList.findIndex((el) => {
         return el.id === postId
-      })
-
+      });
       const posts = this.state.postsList;
       posts.splice(postToDelete, 1);
-      this.setState({ postsList: posts });
-    });
 
+      const comments = this.state.comments.filter((el) => {
+        return el.postId !== postId;
+      });
+
+      this.setState({ postsList: posts, comments });
+    });
+  }
+
+  updateComments(comment) {
+    this.setState({ comments: [...this.state.comments, comment] });
   }
 
   render() {
@@ -56,7 +63,7 @@ class Home extends Component {
 
       return (
         <LazyLoad height={100} key={index} offset={-50} overflow={true} once>
-          <PostPanel postId={el.id} deletePost={this.deletePost.bind(this)} name={userObj.name} body={el.body} title={el.title} comments={postComments} />
+          <PostPanel updateComments={this.updateComments.bind(this)} postId={el.id} deletePost={this.deletePost.bind(this)} name={userObj.name} body={el.body} title={el.title} comments={postComments} />
         </LazyLoad>
       )
     })

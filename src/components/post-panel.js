@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import mui from 'material-ui';
-import DeleteIcon from 'react-material-icons/icons/action/delete';
+import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import '../styles/post-panel.css';
 import Comment from './comment';
+import CommentBox from './comment-box';
 
 class PostPanel extends Component {
   constructor(props) {
@@ -59,6 +59,7 @@ class PostPanel extends Component {
               <p style={pStyles}>{this.props.body}</p>
             </div>
             { comments }
+            <CommentBox updateComments={this.props.updateComments} postId={this.props.postId} />
           </div>
       </details>
     );
