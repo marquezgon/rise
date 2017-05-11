@@ -17,13 +17,15 @@ class Home extends Component {
       const postsList = data;
       axios.get(`${URL}/users`).then(({ data }) => {
         const users = data;
-        this.setState({ postsList, users });
+        axios.get(`${URL}/comments`).then(({ data }) => {
+          const comments = data;
+          this.setState({ postsList, users, comments });
+        })
       });
     })
   }
 
   render() {
-    console.log(this.state);
     if(!this.state.postsList) {
       return null;
     }
@@ -33,9 +35,13 @@ class Home extends Component {
         return user.id === el.userId;
       });
 
+      const postComments = this.state.comments.filter((comment) => {
+        return comment.postId === el.id;
+      })
+
       return (
         <LazyLoad height={100} key={index} offset={-50} overflow={true} once>
-          <PostPanel name={userObj.name} />
+          <PostPanel name={userObj.name} comments={postComments} />
         </LazyLoad>
       )
     })
