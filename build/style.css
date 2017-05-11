@@ -8,7 +8,7 @@ details{
 }
 details div.content{
     padding: 16px;
-    background-color: rgba(0 ,0 ,0, 0.14);
+    background-color: rgba(0 ,0 ,0, 0.07);
 }
 
 details[open] summary:after {
@@ -84,9 +84,9 @@ summary::after {
   color: red !important;
 }
 .comment-box {
-  -webkit-box-shadow: 0 4px 4px -2px #000000;
-  -moz-box-shadow: 0 4px 4px -2px #000000;
-  box-shadow: 0 4px 4px -2px #000000;
+  -webkit-box-shadow: 0 3px 4px -2px #111;
+  -moz-box-shadow: 0 3px 4px -2px #111;
+  box-shadow: 0 3px 4px -2px #111;
   background-color: white;
 }
 html {
@@ -96,6 +96,14 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.64);
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+hr.divider {
+  width: 100%;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.54);
+  position: absolute;
+  top: 240px;
 }
 .flex-container {
   display: -webkit-flex;
@@ -107,6 +115,7 @@ body {
   align-items: center;
 }
 .main-box {
+  z-index: 10;
   max-width: 700px;
   max-height: 600px;
   width: 700px;

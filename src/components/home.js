@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
 import axios from 'axios';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import { URL } from '../helpers';
 import PostPanel from './post-panel';
 import '../styles/home.css';
@@ -20,9 +22,22 @@ class Home extends Component {
         axios.get(`${URL}/comments`).then(({ data }) => {
           const comments = data;
           this.setState({ postsList, users, comments });
-        })
+        });
       });
     })
+  }
+
+  deletePost(postId) {
+    axios.delete(`${URL}/posts/${postId}`).then(() => {
+      const postToDelete = this.state.postsList.findIndex((el) => {
+        return el.id === postId
+      })
+
+      const posts = this.state.postsList;
+      posts.splice(postToDelete, 1);
+      this.setState({ postsList: posts });
+    });
+
   }
 
   render() {
@@ -41,15 +56,24 @@ class Home extends Component {
 
       return (
         <LazyLoad height={100} key={index} offset={-50} overflow={true} once>
-          <PostPanel name={userObj.name} comments={postComments} />
+          <PostPanel postId={el.id} deletePost={this.deletePost.bind(this)} name={userObj.name} body={el.body} title={el.title} comments={postComments} />
         </LazyLoad>
       )
     })
 
+    const floatingActionStyles = {
+      position: 'absolute',
+      top: '221px',
+      right: '56px',
+      zIndex: '3'
+    }
 
     return (
       <div className="main-box">
         {posts}
+        <FloatingActionButton style={floatingActionStyles}>
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     )
   }

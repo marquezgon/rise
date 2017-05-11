@@ -19,6 +19,7 @@ class PostPanel extends Component {
   handleDeleteClick(e) {
     e.preventDefault();
     e.stopPropagation();
+    this.props.deletePost(this.props.postId);
   }
 
   render() {
@@ -37,11 +38,13 @@ class PostPanel extends Component {
       return <Comment body={el.body} name={el.name} key={index} />
     });
 
+    const postTitle = this.props.title.length > 20 ? `${this.props.title.substring(0, 20)}...` : this.props.title
+
     return (
       <details onClick={this.handleDetailsClick.bind(this)} ref={(c) => this.details = c}>
           <summary>
               <ul>
-                <li>Meal Preference <span>{this.props.name}</span></li>
+                <li>{postTitle} <span>{this.props.name}</span></li>
                 <li style={liStyles}>
                   {
                     this.state.isOpen ?
@@ -53,7 +56,7 @@ class PostPanel extends Component {
           </summary>
           <div className="content">
             <div>
-              <p style={pStyles}>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+              <p style={pStyles}>{this.props.body}</p>
             </div>
             { comments }
           </div>

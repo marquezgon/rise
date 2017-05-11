@@ -1,6 +1,6 @@
 .comment-box {
-  -webkit-box-shadow: 0 4px 4px -2px #000000;
-  -moz-box-shadow: 0 4px 4px -2px #000000;
-  box-shadow: 0 4px 4px -2px #000000;
+  -webkit-box-shadow: 0 3px 4px -2px #111;
+  -moz-box-shadow: 0 3px 4px -2px #111;
+  box-shadow: 0 3px 4px -2px #111;
   background-color: white;
 }

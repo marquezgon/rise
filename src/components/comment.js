@@ -3,7 +3,7 @@ import '../styles/comment.css';
 
 const Comment = (props) => {
   const nameStyles = {
-    padding: '16px 16px 4px 16px',
+    padding: '16px 16px 0px 16px',
     color: '#212121',
     fontSize: '15px',
     marginBottom: '0px'
@@ -13,7 +13,8 @@ const Comment = (props) => {
     padding: '0 16px 16px 16px',
     fontSize: '14px',
     color: 'rgba(0, 0, 0, 0.54)',
-    marginTop: '0px'
+    marginTop: '0px',
+    lineHeight: '24px'
   }
 
   return (
