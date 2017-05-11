@@ -11,9 +11,12 @@ class PostPanel extends Component {
     this.state = { isOpen: false };
   }
 
-  handleDetailsClick() {
-    const detailsOpen = this.details.hasAttribute('open');
-    this.setState({ isOpen: !detailsOpen });
+  handleDetailsClick(e) {
+    console.log(e.target.tagName)
+    if(e.target.tagName != 'INPUT' && e.target.tagName != 'path') {
+      const detailsOpen = this.details.hasAttribute('open');
+      this.setState({ isOpen: !detailsOpen });
+    }
   }
 
   handleDeleteClick(e) {
@@ -46,10 +49,8 @@ class PostPanel extends Component {
               <ul>
                 <li>{postTitle} <span>{this.props.name}</span></li>
                 <li style={liStyles}>
-                  {
-                    this.state.isOpen ?
-                      <a className="trash-can-icon" onClick={this.handleDeleteClick.bind(this)}><DeleteIcon/></a> :
-                      null
+                  { this.state.isOpen ?
+                      <a className="trash-can-icon" onClick={this.handleDeleteClick.bind(this)}><DeleteIcon/></a> : null
                   }
                 </li>
               </ul>
@@ -59,7 +60,7 @@ class PostPanel extends Component {
               <p style={pStyles}>{this.props.body}</p>
             </div>
             { comments }
-            <CommentBox updateComments={this.props.updateComments} postId={this.props.postId} />
+            <CommentBox ref={(c) => this.commentBox = c} updateComments={this.props.updateComments} postId={this.props.postId} />
           </div>
       </details>
     );

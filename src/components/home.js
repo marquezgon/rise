@@ -5,6 +5,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { URL } from '../helpers';
 import PostPanel from './post-panel';
+import LoadingSpinner from './loading_spinner';
 import '../styles/home.css';
 
 class Home extends Component {
@@ -49,7 +50,7 @@ class Home extends Component {
 
   render() {
     if(!this.state.postsList) {
-      return null;
+      return <LoadingSpinner />;
     }
 
     const posts = this.state.postsList.map((el, index) => {

@@ -3,9 +3,13 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 app.on('ready', () => {
+  const screenElectron = electron.screen;
+  const mainScreen = screenElectron.getPrimaryDisplay();
+  const dimensions = mainScreen.size;
+  
   mainWindow = new BrowserWindow({
-    height: 900,
-    width: 1200
+    height: dimensions.height,
+    width: dimensions.width
   })
 
   // load the local HTML file

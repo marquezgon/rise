@@ -17,18 +17,20 @@ class CommentBox extends Component {
   submitMessage(e) {
     e.preventDefault();
     const body = this.state.message;
-    const postId = this.props.postId;
-    const form = {
-      body,
-      postId,
-      name: 'Gonzalo',
-      email: 'marquezgon@me.com'
-    }
+    if(body) {
+      const postId = this.props.postId;
+      const form = {
+        body,
+        postId,
+        name: 'Gonzalo',
+        email: 'marquezgon@me.com'
+      }
 
-    axios.post(`${URL}/comments`, form ).then(({ data }) => {
-      this.props.updateComments(data)
-      this.setState({ message: '' });
-    })
+      axios.post(`${URL}/comments`, form ).then(({ data }) => {
+        this.props.updateComments(data)
+        this.setState({ message: '' });
+      });
+    }
   }
 
   render() {
